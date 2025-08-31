@@ -1,66 +1,50 @@
 package com.javaweb.api.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class BuildingDTO {
 	private String idToaNha;
 	private String tenNha;
-	private String idQuan;
-	private String phuong;
-	private String duong;
-	private String ketCau;
+	private String diaChi;
 	private int soTangHam;
 	private float dienTichSan;
-	private String huong;
 	private String dienTichThue;
 	private float giaThue;
-	private String moTaGia;
 	private float phiDichVu;
-	private float phiOto;
-	private float phiNgoaiGio;
-	private float tienDien;
-	private float datCoc;
-	private float thanhToan;
-	private Date thoiHanThue;
-	private Date thoiGianTrangTri;
 	private float phiMoiGioi;
-	private String idLoaiToaNha;
-	private String ghiChu;
+	private String LoaiToaNha;
+	private List<String> tenNhanVien;
+	private List<String> sdtNhanVien;
 
 	public BuildingDTO() {
 		super();
 	}
 
-	public BuildingDTO(String idToaNha, String tenNha, String idQuan, String phuong, String duong, String ketCau,
-			int soTangHam, float dienTichSan, String huong, String dienTichThue, float giaThue, String moTaGia,
-			float phiDichVu, float phiOto, float phiNgoaiGio, float tienDien, float datCoc, float thanhToan,
-			Date thoiHanThue, Date thoiGianTrangTri, float phiMoiGioi, String idLoaiToaNha,
-			String ghiChu) {
+	
+
+	public BuildingDTO(String idToaNha, String tenNha, String diaChi, int soTangHam, float dienTichSan,
+			String dienTichThue, float giaThue, float phiDichVu, float phiMoiGioi, String loaiToaNha,
+			List<String> tenNhanVien, List<String> sdtNhanVien) {
 		super();
 		this.idToaNha = idToaNha;
 		this.tenNha = tenNha;
-		this.idQuan = idQuan;
-		this.phuong = phuong;
-		this.duong = duong;
-		this.ketCau = ketCau;
+		this.diaChi = diaChi;
 		this.soTangHam = soTangHam;
 		this.dienTichSan = dienTichSan;
-		this.huong = huong;
 		this.dienTichThue = dienTichThue;
 		this.giaThue = giaThue;
-		this.moTaGia = moTaGia;
 		this.phiDichVu = phiDichVu;
-		this.phiOto = phiOto;
-		this.phiNgoaiGio = phiNgoaiGio;
-		this.tienDien = tienDien;
-		this.datCoc = datCoc;
-		this.thanhToan = thanhToan;
-		this.thoiHanThue = thoiHanThue;
-		this.thoiGianTrangTri = thoiGianTrangTri;
 		this.phiMoiGioi = phiMoiGioi;
-		this.idLoaiToaNha = idLoaiToaNha;
-		this.ghiChu = ghiChu;
+		LoaiToaNha = loaiToaNha;
+		tenNhanVien = new ArrayList<String>();
+		sdtNhanVien = new ArrayList<String>();
+		this.tenNhanVien = tenNhanVien;
+		this.sdtNhanVien = sdtNhanVien;
 	}
+
+
 
 	public String getIdToaNha() {
 		return idToaNha;
@@ -78,36 +62,12 @@ public class BuildingDTO {
 		this.tenNha = tenNha;
 	}
 
-	public String getIdQuan() {
-		return idQuan;
+	public String getDiaChi() {
+		return diaChi;
 	}
 
-	public void setIdQuan(String idQuan) {
-		this.idQuan = idQuan;
-	}
-
-	public String getPhuong() {
-		return phuong;
-	}
-
-	public void setPhuong(String phuong) {
-		this.phuong = phuong;
-	}
-
-	public String getDuong() {
-		return duong;
-	}
-
-	public void setDuong(String duong) {
-		this.duong = duong;
-	}
-
-	public String getKetCau() {
-		return ketCau;
-	}
-
-	public void setKetCau(String ketCau) {
-		this.ketCau = ketCau;
+	public void setDiaChi(String diaChi) {
+		this.diaChi = diaChi;
 	}
 
 	public int getSoTangHam() {
@@ -126,14 +86,6 @@ public class BuildingDTO {
 		this.dienTichSan = dienTichSan;
 	}
 
-	public String getHuong() {
-		return huong;
-	}
-
-	public void setHuong(String huong) {
-		this.huong = huong;
-	}
-
 	public String getDienTichThue() {
 		return dienTichThue;
 	}
@@ -150,76 +102,12 @@ public class BuildingDTO {
 		this.giaThue = giaThue;
 	}
 
-	public String getMoTaGia() {
-		return moTaGia;
-	}
-
-	public void setMoTaGia(String moTaGia) {
-		this.moTaGia = moTaGia;
-	}
-
 	public float getPhiDichVu() {
 		return phiDichVu;
 	}
 
 	public void setPhiDichVu(float phiDichVu) {
 		this.phiDichVu = phiDichVu;
-	}
-
-	public float getPhiOto() {
-		return phiOto;
-	}
-
-	public void setPhiOto(float phiOto) {
-		this.phiOto = phiOto;
-	}
-
-	public float getPhiNgoaiGio() {
-		return phiNgoaiGio;
-	}
-
-	public void setPhiNgoaiGio(float phiNgoaiGio) {
-		this.phiNgoaiGio = phiNgoaiGio;
-	}
-
-	public float getTienDien() {
-		return tienDien;
-	}
-
-	public void setTienDien(float tienDien) {
-		this.tienDien = tienDien;
-	}
-
-	public float getDatCoc() {
-		return datCoc;
-	}
-
-	public void setDatCoc(float datCoc) {
-		this.datCoc = datCoc;
-	}
-
-	public float getThanhToan() {
-		return thanhToan;
-	}
-
-	public void setThanhToan(float thanhToan) {
-		this.thanhToan = thanhToan;
-	}
-
-	public Date getThoiHanThue() {
-		return thoiHanThue;
-	}
-
-	public void setThoiHanThue(Date thoiHanThue) {
-		this.thoiHanThue = thoiHanThue;
-	}
-
-	public Date getThoiGianTrangTri() {
-		return thoiGianTrangTri;
-	}
-
-	public void setThoiGianTrangTri(Date thoiGianTrangTri) {
-		this.thoiGianTrangTri = thoiGianTrangTri;
 	}
 
 	public float getPhiMoiGioi() {
@@ -230,20 +118,40 @@ public class BuildingDTO {
 		this.phiMoiGioi = phiMoiGioi;
 	}
 
-	public String getIdLoaiToaNha() {
-		return idLoaiToaNha;
+	public String getLoaiToaNha() {
+		return LoaiToaNha;
 	}
 
-	public void setIdLoaiToaNha(String idLoaiToaNha) {
-		this.idLoaiToaNha = idLoaiToaNha;
+	public void setLoaiToaNha(String loaiToaNha) {
+		LoaiToaNha = loaiToaNha;
 	}
 
-	public String getGhiChu() {
-		return ghiChu;
+
+
+	public List<String> getTenNhanVien() {
+		return tenNhanVien;
 	}
 
-	public void setGhiChu(String ghiChu) {
-		this.ghiChu = ghiChu;
+
+
+	public void setTenNhanVien(List<String> tenNhanVien) {
+		//tenNhanVien = new ArrayList<String>();
+		this.tenNhanVien = tenNhanVien;
 	}
 
+
+
+	public List<String> getSdtNhanVien() {
+		return sdtNhanVien;
+	}
+
+
+
+	public void setSdtNhanVien(List<String> sdtNhanVien) {
+		//sdtNhanVien = new ArrayList<String>();
+		this.sdtNhanVien = sdtNhanVien;
+	}
+
+	
+	
 }

@@ -7,11 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.entity.BuildingEntity;
+import com.javaweb.utils.NumberUtils;
+import com.javaweb.utils.StringUtils;
 
 @Repository
 public class BuildingRepositoryIml implements BuildingRepository {
@@ -19,15 +22,90 @@ public class BuildingRepositoryIml implements BuildingRepository {
 	static final String DB_URL = "jdbc:mysql://localhost:3306/qltn";
 	static final String USER = "root";
 	static final String PASS = "123456";
-
+	
+	public static void joinTable(Map<String, Object> params, List<String> loaiToaNha, StringBuilder sql) {
+		String idNhanVien = (String) params.get("idNhanVien");
+		if(StringUtils.checkString(idNhanVien)) {
+			sql.append("JOIN toanha_nhanvien tnnv ON t.idToaNha = tnnv.idToaNha ");
+			sql.append("JOIN nhanvien nv ON tnnv.idNhanVien = nv.idNhanVien ");
+		}
+		String dienTichThueTu = (String) params.get("dienTichThueTu");
+		String dienTichThueDen = (String) params.get("dienTichThueDen");
+		if(StringUtils.checkString(dienTichThueTu) && StringUtils.checkString(dienTichThueDen)) {
+			if(NumberUtils.checkNumber(dienTichThueTu) && NumberUtils.checkNumber(dienTichThueDen)) {
+				sql.append("JOIN dientichthue dtt ON t.idToaNha = dtt.idToaNha ");
+			}
+		}
+	}
+	
+	public static void queryNormal(Map<String, Object> params, StringBuilder where) {
+		for(Map.Entry<String, Object> item : params.entrySet()) {
+			if(!item.getKey().equals("idNhanVien") && !item.getKey().startsWith("dienTichThue") && !item.getKey().startsWith("giaThue") && !item.getKey().equals("loaiToaNha")) {
+				String value = (String) item.getValue();
+				if(StringUtils.checkString(value)) {
+					if(NumberUtils.checkNumber(value)) {
+						where.append("AND t." + item.getKey() + "=" + value + " ");
+					}
+					else {
+						if(item.getKey().equals("tenNhanVien")) {
+							where.append("AND nv." + item.getKey() + " LIKE '%" + value + "%' ");
+						}
+						else if(item.getKey().equals("sdtNhanVien")) {
+							where.append("AND nv." + item.getKey() + " LIKE '%" + value + "%' ");
+						}
+						else where.append("AND t." + item.getKey() + " LIKE '%" + value + "%' ");
+					}
+				}
+			}
+		}
+		
+	}
+	
+	public static void querySpecial(Map<String, Object> params, List<String> loaiToaNha, StringBuilder where) {
+		String idNhanVien = (String) params.get("idNhanVien");
+		if(StringUtils.checkString(idNhanVien)) {
+			where.append("AND tnnv.idNhanVien = '" + idNhanVien + "' ");
+		}
+		String dienTichThueTu = (String) params.get("dienTichThueTu");
+		String dienTichThueDen = (String) params.get("dienTichThueDen");
+		if(StringUtils.checkString(dienTichThueTu)) {
+			where.append("AND dtt.dienTich >= " + dienTichThueTu + " ");
+		}
+		if(StringUtils.checkString(dienTichThueDen)) {
+			where.append("AND dtt.dienTich <= " + dienTichThueDen + " ");
+		}
+		String giaThueTu = (String) params.get("giaThueTu");
+		String giaThueDen = (String) params.get("giaThueDen");
+		if(StringUtils.checkString(giaThueTu)) {
+			where.append("AND t.giaThue >= " + giaThueTu + " ");
+		}
+		if(StringUtils.checkString(giaThueDen)) {
+			where.append("AND t.giaThue <= " + giaThueDen + " ");
+		}
+		if(loaiToaNha!=null && loaiToaNha.size()>0) {
+			List<String> loai = new ArrayList<String>();
+			for(String item : loaiToaNha) {
+				loai.add("'" + item + "'");
+			}
+			where.append("AND t.idLoaiToaNha IN (" + String.join(", ", loai) + ") ");
+		}
+	}
+	
 	@Override
-	public List<BuildingEntity> findAllBuilding() {
+	public List<BuildingEntity> findAllBuilding(Map<String, Object> params, List<String> loaiToaNha) {
 
-		String sql = "SELECT * FROM ToaNha";
-		List<BuildingEntity> result = new ArrayList<>();
+		StringBuilder sql = new StringBuilder("SELECT * FROM ToaNha t ");
+		StringBuilder where = new StringBuilder("WHERE 1=1 ");
+		joinTable(params, loaiToaNha, sql);
+		queryNormal(params, where);
+		querySpecial(params, loaiToaNha, where);
+		sql.append(where);
+		sql.append(" GROUP BY t.idToaNha ");
+		System.out.println(sql.toString());
+		List<BuildingEntity> result = new ArrayList<BuildingEntity>();
 		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(sql)) {
+				ResultSet rs = stmt.executeQuery(sql.toString())) {
 
 			while (rs.next()) {
 				BuildingEntity buildingEntity = new BuildingEntity();
