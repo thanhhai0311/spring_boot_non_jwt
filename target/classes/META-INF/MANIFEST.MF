@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Admin
+Build-Jdk: 21.0.6
+Implementation-Title: java-string-boot-non-jwt
+Implementation-Version: 1.0
+Implementation-Vendor-Id: com.thanhhai
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/java-string-boot-non-jwt
+Created-By: Maven Integration for Eclipse
+
