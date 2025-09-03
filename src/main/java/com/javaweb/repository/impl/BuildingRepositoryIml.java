@@ -31,8 +31,8 @@ public class BuildingRepositoryIml implements BuildingRepository {
 		}
 		String dienTichThueTu = (String) params.get("dienTichThueTu");
 		String dienTichThueDen = (String) params.get("dienTichThueDen");
-		if(StringUtils.checkString(dienTichThueTu) && StringUtils.checkString(dienTichThueDen)) {
-			if(NumberUtils.checkNumber(dienTichThueTu) && NumberUtils.checkNumber(dienTichThueDen)) {
+		if(StringUtils.checkString(dienTichThueTu) || StringUtils.checkString(dienTichThueDen)) {
+			if(NumberUtils.checkNumber(dienTichThueTu) || NumberUtils.checkNumber(dienTichThueDen)) {
 				sql.append("JOIN dientichthue dtt ON t.idToaNha = dtt.idToaNha ");
 			}
 		}
@@ -94,7 +94,7 @@ public class BuildingRepositoryIml implements BuildingRepository {
 	@Override
 	public List<BuildingEntity> findAllBuilding(Map<String, Object> params, List<String> loaiToaNha) {
 
-		StringBuilder sql = new StringBuilder("SELECT * FROM ToaNha t ");
+		StringBuilder sql = new StringBuilder("SELECT t.idToaNha, t.tenNha,t.idQuan,t.phuong,t.duong, t.soTangHam,t.huong,t.dienTichThue,t.giaThue,t.moTaGia,t.phiDichVu,t.phiOto,t.phiNgoaiGio,t.tienDien,t.datCoc,t.thanhToan,t.thoiHanThue,t.thoiGianTrangTri,t.phiMoiGioi,t.idLoaiToaNha,t.ghiChu, t.ketCau, t.dienTichSan FROM ToaNha t ");
 		StringBuilder where = new StringBuilder("WHERE 1=1 ");
 		joinTable(params, loaiToaNha, sql);
 		queryNormal(params, where);
