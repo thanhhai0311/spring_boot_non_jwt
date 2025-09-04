@@ -52,7 +52,7 @@ public class BuildingDTOConverter {
 		String loaiToaNha1 = loaiToaNhaRepository.getTenById(item.getIdLoaiToaNha());
 		buildingDTO.setLoaiToaNha(loaiToaNha1);
 		List<String> listTenNhanVien = nhanVienRepository.getTenById(item.getIdToaNha());
-		//System.out.println(listTenNhanVien);
+		//System.out.println(listTenNhanVien); 
 		buildingDTO.setTenNhanVien(listTenNhanVien);
 		List<String> listSdtNhanVien = nhanVienRepository.getSdtById(item.getIdToaNha());
 		buildingDTO.setSdtNhanVien(listSdtNhanVien);

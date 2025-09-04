@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaweb.repository.DienTichThueRepository;
@@ -14,12 +15,15 @@ import com.javaweb.utils.ConnectionJDBCUtils;
 @Repository
 public class DienTichThueRepositoryImpl implements DienTichThueRepository{
 
+	@Autowired
+	private ConnectionJDBCUtils connectionUtils;
+	
 	@Override
 	public String getDienTichThue(String idToaNha) {
 		String result = "";
 		String sql = "SELECT * FROM dientichthue dtt WHERE dtt.idToaNha = '" +  idToaNha + "' ";
 		System.out.println(sql);
-		try (Connection conn = ConnectionJDBCUtils.getConnection();
+		try (Connection conn = connectionUtils.getConnection();
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql) ) {
 			while (rs.next()) {
