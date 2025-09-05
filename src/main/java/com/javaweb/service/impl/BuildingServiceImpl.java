@@ -26,18 +26,6 @@ public class BuildingServiceImpl implements BuildingService{
 	@Autowired
 	private BuildingRepository buildingRepository;
 	
-	@Autowired
-	private QuanRepository quanRepository;
-	
-	@Autowired
-	private LoaiToaNhaRepository loaiToaNhaRepository;
-	
-	@Autowired
-	private NhanVienRepository nhanVienRepository;
-	
-	@Autowired 
-	private DienTichThueRepository dienTichThueRepository;
-	
 	@Autowired 
 	private BuildingDTOConverter buildingDTOConverter;
 	

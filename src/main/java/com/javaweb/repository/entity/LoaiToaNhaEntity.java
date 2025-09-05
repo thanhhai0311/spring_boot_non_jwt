@@ -1,17 +1,26 @@
 package com.javaweb.repository.entity;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "loaitoanha")
 public class LoaiToaNhaEntity {
-	private String idLoaiToaNha, tenLoaiToaNha;
+//	private String idLoaiToaNha, tenLoaiToaNha;
 
-	public LoaiToaNhaEntity() {
-		super();
-	}
+	@Id
+	private String idLoaiToaNha;
 
-	public LoaiToaNhaEntity(String idLoaiToaNha, String tenLoaiToaNha) {
-		super();
-		this.idLoaiToaNha = idLoaiToaNha;
-		this.tenLoaiToaNha = tenLoaiToaNha;
-	}
+	@Column(name = "tenLoaiToaNha")
+	private String tenLoaiToaNha;
+
+	@OneToMany(mappedBy = "loaiToaNha")
+	private List<BuildingEntity> buildings;
 
 	public String getIdLoaiToaNha() {
 		return idLoaiToaNha;
@@ -27,6 +36,14 @@ public class LoaiToaNhaEntity {
 
 	public void setTenLoaiToaNha(String tenLoaiToaNha) {
 		this.tenLoaiToaNha = tenLoaiToaNha;
+	}
+
+	public List<BuildingEntity> getBuildings() {
+		return buildings;
+	}
+
+	public void setBuildings(List<BuildingEntity> buildings) {
+		this.buildings = buildings;
 	}
 
 }

@@ -1,18 +1,29 @@
 package com.javaweb.repository.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "dientichthue")
 public class DienTichThueEntity {
-	private String idDienTichThue, idToaNha, dienTich;
+//	private String idDienTichThue, idToaNha, dienTich;
 
-	public DienTichThueEntity() {
-		super();
-	}
+	@Id
+	private String idDienTichThue;
 
-	public DienTichThueEntity(String idDienTichThue, String idToaNha, String dienTich) {
-		super();
-		this.idDienTichThue = idDienTichThue;
-		this.idToaNha = idToaNha;
-		this.dienTich = dienTich;
-	}
+//	@Column(name = "idToaNha")
+//	private String idToaNha;
+
+	@Column(name = "dienTich")
+	private String dienTich;
+
+	@ManyToOne
+	@JoinColumn(name = "idToaNha")
+	private BuildingEntity building;
 
 	public String getIdDienTichThue() {
 		return idDienTichThue;
@@ -22,20 +33,20 @@ public class DienTichThueEntity {
 		this.idDienTichThue = idDienTichThue;
 	}
 
-	public String getIdToaNha() {
-		return idToaNha;
-	}
-
-	public void setIdToaNha(String idToaNha) {
-		this.idToaNha = idToaNha;
-	}
-
 	public String getDienTich() {
 		return dienTich;
 	}
 
 	public void setDienTich(String dienTich) {
 		this.dienTich = dienTich;
+	}
+
+	public BuildingEntity getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(BuildingEntity building) {
+		this.building = building;
 	}
 
 }

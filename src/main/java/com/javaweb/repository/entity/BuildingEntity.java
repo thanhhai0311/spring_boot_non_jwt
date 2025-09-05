@@ -1,66 +1,110 @@
 package com.javaweb.repository.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "toanha")
 public class BuildingEntity {
+
+	@Id
 	private String idToaNha;
+
+	@Column(name = "tenNha")
 	private String tenNha;
-	private String idQuan;
+
+//	@Column(name = "idQuan")
+//	private String idQuan;
+
+	@Column(name = "phuong")
 	private String phuong;
+
+	@Column(name = "duong")
 	private String duong;
+
+	@Column(name = "ketCau")
 	private String ketCau;
+
+	@Column(name = "soTangHam")
 	private int soTangHam;
+
+	@Column(name = "dienTichSan")
 	private float dienTichSan;
+
+	@Column(name = "huong")
 	private String huong;
-	private String dienTichThue;
+
+//	@Column(name = "dienTichThue")
+//	private String dienTichThue;
+
+	@Column(name = "giaThue")
 	private float giaThue;
+
+	@Column(name = "moTaGia")
 	private String moTaGia;
+
+	@Column(name = "phiDichVu")
 	private float phiDichVu;
+
+	@Column(name = "phiOto")
 	private float phiOto;
+
+	@Column(name = "phiNgoaiGio")
 	private float phiNgoaiGio;
+
+	@Column(name = "tienDien")
 	private float tienDien;
+
+	@Column(name = "datCoc")
 	private float datCoc;
+
+	@Column(name = "thanhToan")
 	private float thanhToan;
+
+	@Temporal(TemporalType.DATE) // hoặc TIMESTAMP nếu cột có cả giờ/phút/giây
+	@Column(name = "thoiHanThue")
 	private Date thoiHanThue;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "thoiGianTrangTri")
 	private Date thoiGianTrangTri;
+
+	@Column(name = "phiMoiGioi")
 	private float phiMoiGioi;
-	private String idLoaiToaNha;
+
+//	@Column(name = "idLoaiToaNha")
+//	private String idLoaiToaNha;
+
+	@Column(name = "ghiChu", columnDefinition = "TEXT")
 	private String ghiChu;
 
-	public BuildingEntity() {
-		super();
-	}
+	@ManyToOne
+	@JoinColumn(name = "idQuan")
+	private QuanEntity quan;
 
-	public BuildingEntity(String idToaNha, String tenNha, String idQuan, String phuong, String duong, String ketCau,
-			int soTangHam, float dienTichSan, String huong, String dienTichThue, float giaThue, String moTaGia,
-			float phiDichVu, float phiOto, float phiNgoaiGio, float tienDien, float datCoc, float thanhToan,
-			Date thoiHanThue, Date thoiGianTrangTri, float phiMoiGioi, String idLoaiToaNha,
-			String ghiChu) {
-		super();
-		this.idToaNha = idToaNha;
-		this.tenNha = tenNha;
-		this.idQuan = idQuan;
-		this.phuong = phuong;
-		this.duong = duong;
-		this.ketCau = ketCau;
-		this.soTangHam = soTangHam;
-		this.dienTichSan = dienTichSan;
-		this.huong = huong;
-		this.dienTichThue = dienTichThue;
-		this.giaThue = giaThue;
-		this.moTaGia = moTaGia;
-		this.phiDichVu = phiDichVu;
-		this.phiOto = phiOto;
-		this.phiNgoaiGio = phiNgoaiGio;
-		this.tienDien = tienDien;
-		this.datCoc = datCoc;
-		this.thanhToan = thanhToan;
-		this.thoiHanThue = thoiHanThue;
-		this.thoiGianTrangTri = thoiGianTrangTri;
-		this.phiMoiGioi = phiMoiGioi;
-		this.idLoaiToaNha = idLoaiToaNha;
-		this.ghiChu = ghiChu;
-	}
+	@ManyToOne
+	@JoinColumn(name = "idLoaiToaNha")
+	private LoaiToaNhaEntity loaiToaNha;
+
+	@OneToMany(mappedBy = "building")
+	private List<DienTichThueEntity> dienTichThue;
+
+	@ManyToMany
+	@JoinTable(name = "toanha_nhanvien", joinColumns = @JoinColumn(name = "idToaNha"), inverseJoinColumns = @JoinColumn(name = "idNhanVien"))
+	private List<NhanVienEntity> nhanViens = new ArrayList<NhanVienEntity>();
 
 	public String getIdToaNha() {
 		return idToaNha;
@@ -76,14 +120,6 @@ public class BuildingEntity {
 
 	public void setTenNha(String tenNha) {
 		this.tenNha = tenNha;
-	}
-
-	public String getIdQuan() {
-		return idQuan;
-	}
-
-	public void setIdQuan(String idQuan) {
-		this.idQuan = idQuan;
 	}
 
 	public String getPhuong() {
@@ -132,14 +168,6 @@ public class BuildingEntity {
 
 	public void setHuong(String huong) {
 		this.huong = huong;
-	}
-
-	public String getDienTichThue() {
-		return dienTichThue;
-	}
-
-	public void setDienTichThue(String dienTichThue) {
-		this.dienTichThue = dienTichThue;
 	}
 
 	public float getGiaThue() {
@@ -230,20 +258,44 @@ public class BuildingEntity {
 		this.phiMoiGioi = phiMoiGioi;
 	}
 
-	public String getIdLoaiToaNha() {
-		return idLoaiToaNha;
-	}
-
-	public void setIdLoaiToaNha(String idLoaiToaNha) {
-		this.idLoaiToaNha = idLoaiToaNha;
-	}
-
 	public String getGhiChu() {
 		return ghiChu;
 	}
 
 	public void setGhiChu(String ghiChu) {
 		this.ghiChu = ghiChu;
+	}
+
+	public QuanEntity getQuan() {
+		return quan;
+	}
+
+	public void setQuan(QuanEntity quan) {
+		this.quan = quan;
+	}
+
+	public LoaiToaNhaEntity getLoaiToaNha() {
+		return loaiToaNha;
+	}
+
+	public void setLoaiToaNha(LoaiToaNhaEntity loaiToaNha) {
+		this.loaiToaNha = loaiToaNha;
+	}
+
+	public List<DienTichThueEntity> getDienTichThue() {
+		return dienTichThue;
+	}
+
+	public void setDienTichThue(List<DienTichThueEntity> dienTichThue) {
+		this.dienTichThue = dienTichThue;
+	}
+
+	public List<NhanVienEntity> getNhanViens() {
+		return nhanViens;
+	}
+
+	public void setNhanViens(List<NhanVienEntity> nhanViens) {
+		this.nhanViens = nhanViens;
 	}
 
 }

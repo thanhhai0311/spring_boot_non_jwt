@@ -1,22 +1,49 @@
 package com.javaweb.repository.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "nhanvien")
 public class NhanVienEntity {
-	private String idNhanVien, tenNhanVien, sdtNhanVien, email, username, password;
+//	private String idNhanVien, tenNhanVien, sdtNhanVien, email, username, password;
 
-	public NhanVienEntity() {
-		super();
-	}
+	@Id
+	private String idNhanVien;
 
-	public NhanVienEntity(String idNhanVien, String tenNhanVien, String sdtNhanVien, String email, String username,
-			String password) {
-		super();
-		this.idNhanVien = idNhanVien;
-		this.tenNhanVien = tenNhanVien;
-		this.sdtNhanVien = sdtNhanVien;
-		this.email = email;
-		this.username = username;
-		this.password = password;
-	}
+	@Column(name = "tenNhanVien")
+	private String tenNhanVien;
+
+	@Column(name = "sdtNhanVien")
+	private String sdtNhanVien;
+
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "username")
+	private String username;
+
+	@Column(name = "password")
+	private String password;
+
+	@ManyToMany(mappedBy = "nhanViens")
+	private List<BuildingEntity> buildings = new ArrayList<BuildingEntity>();
+
+	@ManyToMany
+	@JoinTable(name = "nhanvien_role", joinColumns = @JoinColumn(name = "idNhanVien"), inverseJoinColumns = @JoinColumn(name = "idRole"))
+	private List<RoleEntity> roles = new ArrayList<RoleEntity>();
+
+	@OneToMany(mappedBy = "nhanVien")
+	private List<NhanVienKhachHangEntity> nvkhs = new ArrayList<NhanVienKhachHangEntity>();
 
 	public String getIdNhanVien() {
 		return idNhanVien;
@@ -64,6 +91,30 @@ public class NhanVienEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<BuildingEntity> getBuildings() {
+		return buildings;
+	}
+
+	public void setBuildings(List<BuildingEntity> buildings) {
+		this.buildings = buildings;
+	}
+
+	public List<RoleEntity> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RoleEntity> roles) {
+		this.roles = roles;
+	}
+
+	public List<NhanVienKhachHangEntity> getNvkhs() {
+		return nvkhs;
+	}
+
+	public void setNvkhs(List<NhanVienKhachHangEntity> nvkhs) {
+		this.nvkhs = nvkhs;
 	}
 
 }
