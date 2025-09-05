@@ -14,7 +14,7 @@ public class BuildingDTO {
 	private float giaThue;
 	private float phiDichVu;
 	private float phiMoiGioi;
-	private String LoaiToaNha1;
+	private String LoaiToaNha;
 	private List<String> tenNhanVien;
 	private List<String> sdtNhanVien;
 
@@ -37,7 +37,7 @@ public class BuildingDTO {
 		this.giaThue = giaThue;
 		this.phiDichVu = phiDichVu;
 		this.phiMoiGioi = phiMoiGioi;
-		LoaiToaNha1 = loaiToaNha;
+		LoaiToaNha = loaiToaNha;
 		tenNhanVien = new ArrayList<String>();
 		sdtNhanVien = new ArrayList<String>();
 		this.tenNhanVien = tenNhanVien;
@@ -118,12 +118,12 @@ public class BuildingDTO {
 		this.phiMoiGioi = phiMoiGioi;
 	}
 
-	public String getLoaiToaNha1() {
-		return LoaiToaNha1;
+	public String getLoaiToaNha() {
+		return LoaiToaNha;
 	}
 
-	public void setLoaiToaNha1(String loaiToaNha) {
-		LoaiToaNha1 = loaiToaNha;
+	public void setLoaiToaNha(String loaiToaNha) {
+		LoaiToaNha = loaiToaNha;
 	}
 
 

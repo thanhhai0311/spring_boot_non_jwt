@@ -34,7 +34,7 @@ public class BuildingDTOConverter {
 			dienTichThue+=it.getDienTich()+" ";
 		}
 		buildingDTO.setDienTichThue(dienTichThue);
-		buildingDTO.setLoaiToaNha1(item.getLoaiToaNha().getTenLoaiToaNha());
+		buildingDTO.setLoaiToaNha(item.getLoaiToaNha().getTenLoaiToaNha());
 		List<NhanVienEntity> nv = item.getNhanViens();
 		List<String> listTenNhanVien = new ArrayList<String>();
 		List<String> listSdtNhanVien = new ArrayList<String>();
