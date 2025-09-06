@@ -1,4 +1,4 @@
-package com.javaweb.repository.impl;
+package com.javaweb.repository.custom.impl;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -11,24 +11,28 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import com.javaweb.builder.BuildingSearchBuilder;
 import com.javaweb.repository.BuildingRepository;
+import com.javaweb.repository.custom.BuildingRepositoryCustom;
 import com.javaweb.repository.entity.BuildingEntity;
 import com.javaweb.utils.ConnectionJDBCUtils;
 import com.javaweb.utils.NumberUtils;
 import com.javaweb.utils.StringUtils;
 
 @Repository
-public class BuildingRepositoryIml implements BuildingRepository {
+@Primary
+public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
 	@Autowired
 	private ConnectionJDBCUtils connectionJDBCUtils;
 
-	@Autowired
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	public static void joinTable(BuildingSearchBuilder buildingSearchBuilder, StringBuilder sql) {

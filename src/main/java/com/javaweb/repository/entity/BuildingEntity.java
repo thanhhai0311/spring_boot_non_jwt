@@ -106,6 +106,7 @@ public class BuildingEntity {
 	@JoinTable(name = "toanha_nhanvien", joinColumns = @JoinColumn(name = "idToaNha"), inverseJoinColumns = @JoinColumn(name = "idNhanVien"))
 	private List<NhanVienEntity> nhanViens = new ArrayList<NhanVienEntity>();
 
+	
 	public String getIdToaNha() {
 		return idToaNha;
 	}

@@ -8,12 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.javaweb.api.model.BuildingDTO;
-import com.javaweb.config.ModelMapperConfig;
-import com.javaweb.repository.BuildingRepository;
-import com.javaweb.repository.DienTichThueRepository;
-import com.javaweb.repository.LoaiToaNhaRepository;
-import com.javaweb.repository.NhanVienRepository;
-import com.javaweb.repository.QuanRepository;
 import com.javaweb.repository.entity.BuildingEntity;
 import com.javaweb.repository.entity.DienTichThueEntity;
 import com.javaweb.repository.entity.NhanVienEntity;

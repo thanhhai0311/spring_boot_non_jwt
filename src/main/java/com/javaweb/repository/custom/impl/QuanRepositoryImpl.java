@@ -1,4 +1,4 @@
-package com.javaweb.repository.impl;
+package com.javaweb.repository.custom.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +12,6 @@ import com.javaweb.repository.QuanRepository;
 
 
 @Repository
-public class QuanRepositoryImpl implements QuanRepository{
+public class QuanRepositoryImpl {
 
 }

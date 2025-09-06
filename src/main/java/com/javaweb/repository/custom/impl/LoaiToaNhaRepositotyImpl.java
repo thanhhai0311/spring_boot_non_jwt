@@ -1,4 +1,4 @@
-package com.javaweb.repository.impl;
+package com.javaweb.repository.custom.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.javaweb.repository.LoaiToaNhaRepository;
 
 @Repository
-public class LoaiToaNhaRepositotyImpl implements LoaiToaNhaRepository {
+public class LoaiToaNhaRepositotyImpl {
 
 }

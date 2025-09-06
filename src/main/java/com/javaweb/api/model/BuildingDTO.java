@@ -8,12 +8,12 @@ public class BuildingDTO {
 	private String idToaNha;
 	private String tenNha;
 	private String diaChi;
-	private int soTangHam;
-	private float dienTichSan;
+	private Integer soTangHam;
+	private Float dienTichSan;
 	private String dienTichThue;
-	private float giaThue;
-	private float phiDichVu;
-	private float phiMoiGioi;
+	private Float giaThue;
+	private Float phiDichVu;
+	private Float phiMoiGioi;
 	private String LoaiToaNha;
 	private List<String> tenNhanVien;
 	private List<String> sdtNhanVien;
